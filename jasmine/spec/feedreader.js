@@ -27,7 +27,7 @@ $(function () {
         it('has URL', function () {
             allFeeds.forEach(function (feed) {
                 expect(feed.url).toBeDefined();
-                expect(feed.url.length).toBeGreaterThan(0);
+                expect(feed.url).toMatch(/^(http|https):\/\//);
             });
         });
 
@@ -50,7 +50,7 @@ $(function () {
         This tests to make sure that the menu element is hidden by default.
         ----------------------------------------*/
         it('start hidden', function () {
-            expect($('body.menu-hidden').length).toEqual(1);
+            expect($('body').hasClass('menu-hidden')).toBe(true);
         });
 
         /*----------------------------------------
@@ -60,10 +60,10 @@ $(function () {
             spyOn($('.menu-icon-link'), 'click');
 
             $('.menu-icon-link').click();
-            expect($('body').hasClass('menu-hidden')).toBeFalsy();
+            expect($('body').hasClass('menu-hidden')).toBe(false);
 
             $('.menu-icon-link').click();
-            expect($('body').hasClass('menu-hidden')).toBeTruthy();
+            expect($('body').hasClass('menu-hidden')).toBe(true);
         });
     });
 
@@ -81,9 +81,8 @@ $(function () {
         This tests to make sure that  when the loadFeed function is called and completes its work, 
         there is at least a single .entry element within the .feed container.
         ----------------------------------------*/
-        it('has at least a single entry', function (done) {
+        it('has at least a single entry', function () {
             expect($('.feed .entry').length).toBeGreaterThan(0);
-            done();
         });
     });
 
@@ -101,13 +100,18 @@ $(function () {
             });
         });
 
+        afterEach(function (done) {
+            loadFeed(0, function () {
+                done();
+            });
+        });
+
         /*----------------------------------------
         Make sure when new feed is loaded by loadFeed function the content actually changes. 
         ----------------------------------------*/
-        it("changes its loaded content", function (done) {
+        it("changes its loaded content", function () {
             var currentElementSelection = $('.feed').html();
             expect(startFeedElementSelection).not.toBe(currentElementSelection);
-            done();
         });
     });
 }());

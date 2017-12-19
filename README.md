@@ -2,6 +2,10 @@
 
 This project is a web-based application that reads RSS feeds. This application has a group of suite  testing, made with [Jasmine](http://jasmine.github.io/).
 
+## Get Started
+
+Just open index.html and see the Jasmine Testing Feedback.
+
 ## Why this Project?
 
 Testing is an important part of the development process and many organizations practice a standard of development known as "test-driven development". This is when developers write tests first, before they ever start developing their application. All the tests initially fail and then they start writing application code to make these tests pass.
