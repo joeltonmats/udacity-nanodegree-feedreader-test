@@ -95,7 +95,6 @@ $(function () {
         beforeEach(function (done) {
             loadFeed(0, function () {
                 startFeedElementSelection = $('.feed').html();
-                console.log('startFeedElementSelection', startFeedElementSelection);
                 loadFeed(1, function () {
                     done();
                 });
